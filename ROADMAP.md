@@ -11,15 +11,23 @@
 #### 已完成 ✅
 - [x] Unity AR基础框架搭建
 - [x] AnimalARManager - AR图像识别系统
-- [x] AnimalChatManager - AI对话系统
+- [x] AnimalChatManager - AI对话系统（已从阿里云切换到DeepSeek）
 - [x] GitHub仓库设置和代码上传
 - [x] 项目文档（README.md）
+- [x] API配置和集成（DeepSeek API）
+- [x] MainUTController - 主控制器
+- [x] GoalManager - 教育目标管理系统
+- [x] AnimalPrefabManager - 动物预制件管理系统
+- [x] ImageLibraryManager - 图像库管理系统
+- [x] ConfigLoader - 配置加载器
+- [x] 基础UI界面设计
+- [x] 场景搭建（主场景和UI场景）
 
 #### 进行中 🔄
 - [ ] 获取3D动物模型资源
 - [ ] 创建AR识别图库
-- [ ] 配置API密钥和测试对话
-- [ ] 设计基础UI界面
+- [ ] 设计完整UI界面
+- [ ] 测试API对话功能
 
 ### 第二阶段：功能完善（第3-4周）
 **目标**：完善用户体验，添加教育内容
@@ -64,7 +72,7 @@
 - 识别稳定性优化
 
 #### 2. AI对话模块
-- 大语言模型集成
+- DeepSeek大语言模型集成
 - 动物角色化对话
 - 对话历史管理
 - 响应速度优化
@@ -94,6 +102,8 @@
 - ✅ AR识别系统实现
 - ✅ AI对话系统集成
 - ✅ GitHub代码管理
+- ✅ DeepSeek API集成
+- ✅ 配置管理系统
 
 ### 里程碑2：可演示版本（第2周）
 - [ ] 至少2种动物模型
@@ -179,7 +189,7 @@
 
 ### 技术资源
 - Unity Pro许可证
-- 阿里云API服务
+- DeepSeek API服务
 - 3D模型资源库
 - 测试设备（iOS/Android）
 - 云存储和CDN
@@ -227,4 +237,13 @@
 **让我们一起用科技的力量，守护地球的每一个生命！** 🌍❤️🐾
 
 *最后更新：2026年2月2日*
-*版本：1.0.0*
+*版本：2.0.0*
+
+## 🔄 今日更新
+
+### 2026年2月2日 - 项目架构完善
+- **API切换**: 从阿里云通义千问切换到DeepSeek API
+- **系统完善**: 新增教育目标系统(GoalManager)、动物预制件管理系统(AnimalPrefabManager)、图像库管理系统(ImageLibraryManager)、配置加载器(ConfigLoader)
+- **UI增强**: 创建了完整的UI场景和交互界面
+- **文档更新**: 更新了README、创建了API_SETUP.md和PROJECT_SUMMARY.md
+- **代码优化**: 重构了API配置加载机制，提高了代码的模块化程度

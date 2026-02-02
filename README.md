@@ -10,7 +10,7 @@
 - 支持多种动物类型切换
 
 ### 🤖 AI智能对话
-- 集成阿里通义千问大语言模型
+- 集成 DeepSeek 大语言模型
 - 动物角色化对话（熊猫、东北虎、雪豹、江豚）
 - 个性化性格设定和知识科普
 
@@ -19,12 +19,17 @@
 - 优化的AR性能和电池管理
 - 响应式UI设计
 
+### 🎯 教育目标系统
+- 互动进度追踪
+- 学习成就解锁
+- 知识掌握评估
+
 ## 🛠️ 技术栈
 
 - **Unity 2022.3 LTS** - 游戏引擎
 - **AR Foundation** - 跨平台AR框架
 - **XR Interaction Toolkit** - AR交互组件
-- **阿里通义千问API** - 大语言模型服务
+- **DeepSeek API** - 大语言模型服务
 - **C#** - 编程语言
 
 ## 🚀 快速开始
@@ -45,13 +50,14 @@
    - 等待依赖包自动导入
 
 3. **配置API密钥**
-   - 复制 `Assets/StreamingAssets/api_config.example.json` 为 `api_config.json`
-   - 填入阿里云API密钥
+   - 项目已配置 DeepSeek API 密钥
+   - 查看 `Assets/StreamingAssets/api_config.json`
+   - 如需更换API，参考 `API_SETUP.md` 指南
 
 4. **导入3D模型**
    - 下载濒危动物3D模型（FBX/OBJ格式）
    - 拖放到 `Assets/Models/` 文件夹
-   - 创建Prefab并配置到 `AnimalARManager`
+   - 创建Prefab并配置到 `AnimalPrefabManager`
 
 5. **创建AR识别图**
    - 准备512x512 PNG格式识别图
@@ -69,14 +75,30 @@ EndangeredAnimalAR/
 ├── Assets/
 │   ├── Scripts/              # C#脚本
 │   │   ├── AnimalARManager.cs    # AR动物管理器
-│   │   └── AnimalChatManager.cs  # AI对话管理器
+│   │   ├── AnimalChatManager.cs  # AI对话管理器
+│   │   ├── MainUTController.cs   # 主控制器
+│   │   ├── GoalManager.cs        # 教育目标管理器
+│   │   ├── AnimalPrefabManager.cs # 动物预制件管理器
+│   │   ├── ImageLibraryManager.cs # 图像库管理器
+│   │   ├── AnimalDefinition.cs   # 动物定义脚本
+│   │   ├── AnimalConfigManager.cs # 动物配置管理器
+│   │   └── ConfigLoader.cs       # 配置加载器
 │   ├── StreamingAssets/      # 配置文件
 │   │   └── api_config.json   # API配置
-│   ├── Models/              # 3D模型资源
-│   ├── Scenes/              # Unity场景
-│   └── Resources/           # 识别图等资源
+│   ├── Models/               # 3D模型资源
+│   │   └── README.md         # 模型资源说明
+│   ├── Scenes/               # Unity场景
+│   │   ├── EndangeredAnimalAR.unity # 主场景
+│   │   └── UI.unity          # UI场景
+│   ├── Resources/            # 资源文件
+│   │   └── ExampleAnimals.txt # 示例动物配置说明
+│   └── Prefabs/              # 预制件（待创建）
 ├── ProjectSettings/         # Unity项目设置
 ├── Packages/               # Unity包管理
+├── API_SETUP.md            # API配置指南
+├── PROJECT_SUMMARY.md      # 项目总结
+├── DAILY_PROGRESS.md       # 开发日志
+├── ROADMAP.md              # 项目路线图
 └── README.md              # 项目说明
 ```
 
@@ -99,14 +121,16 @@ EndangeredAnimalAR/
 - 问答模式：向动物提问
 - 故事模式：听动物讲述生存故事
 - 挑战模式：完成保护知识问答
+- 进度追踪：查看学习成就
 
 ## 🔧 开发指南
 
 ### 添加新动物
 1. 准备3D模型和识别图
-2. 在 `AnimalARManager` 中添加动物映射
+2. 在 `AnimalPrefabManager` 中添加动物配置
 3. 在 `AnimalChatManager` 中添加性格配置
-4. 测试AR识别和对话功能
+4. 在 `ImageLibraryManager` 中配置识别图
+5. 测试AR识别和对话功能
 
 ### 扩展对话系统
 - 修改 `AnimalPersonalities` 字典添加新性格
@@ -117,6 +141,11 @@ EndangeredAnimalAR/
 - 使用低多边形模型
 - 优化材质和贴图
 - 实现对象池管理
+
+### 教育目标系统
+- 配置学习目标和成就
+- 追踪用户互动进度
+- 提供个性化反馈
 
 ## 📚 教育价值
 
@@ -149,7 +178,7 @@ EndangeredAnimalAR/
 ## 🙏 致谢
 
 - Unity Technologies - AR Foundation 和 XR Interaction Toolkit
-- 阿里云 - 通义千问大语言模型API
+- DeepSeek - 大语言模型API服务
 - 开源社区 - 提供的3D模型和工具
 - 所有濒危动物保护工作者
 

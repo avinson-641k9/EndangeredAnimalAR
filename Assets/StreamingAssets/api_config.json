@@ -1,5 +1,5 @@
 {
-    "qwen_api_key": "sk-1e8f8c1ed9ca496b96b8c0144f42cae1",
-    "qwen_model": "qwen-turbo",
-    "qwen_endpoint": "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+  "deepseek_api_key": "sk-4b16e6b8e1eb45cba6c9381a2d5740b0",
+  "deepseek_model": "deepseek-chat",
+  "deepseek_endpoint": "https://api.deepseek.com/chat/completions"
 }

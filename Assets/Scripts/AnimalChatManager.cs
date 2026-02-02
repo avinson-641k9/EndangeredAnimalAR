@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 /// <summary>
 /// 濒危动物对话管理器
-/// 使用阿里通义千问 API 实现动物角色化对话
+/// 使用 DeepSeek API 实现动物角色化对话
 /// </summary>
 public class AnimalChatManager : MonoBehaviour
 {
@@ -68,9 +68,9 @@ public class AnimalChatManager : MonoBehaviour
     [Serializable]
     private class ApiConfig
     {
-        public string qwen_api_key;
-        public string qwen_model;
-        public string qwen_endpoint;
+        public string deepseek_api_key;
+        public string deepseek_model;
+        public string deepseek_endpoint;
     }
 
     [Serializable]
@@ -81,47 +81,31 @@ public class AnimalChatManager : MonoBehaviour
     }
 
     [Serializable]
-    private class QwenRequest
+    private class DeepSeekRequest
     {
         public string model;
-        public QwenInput input;
-        public QwenParameters parameters;
-    }
-
-    [Serializable]
-    private class QwenInput
-    {
         public ChatMessage[] messages;
-    }
-
-    [Serializable]
-    private class QwenParameters
-    {
         public float temperature = 0.7f;
         public int max_tokens = 150;
-        public string result_format = "message";
     }
 
     [Serializable]
-    private class QwenResponse
+    private class DeepSeekResponse
     {
-        public QwenOutput output;
-        public string request_id;
+        public DeepSeekChoice[] choices;
+        public string id;
+        public string object_type;
+        public long created;
+        public string model;
     }
 
     [Serializable]
-    private class QwenOutput
+    private class DeepSeekChoice
     {
-        public QwenChoice[] choices;
-        public string finish_reason;
-        public string text;
-    }
-
-    [Serializable]
-    private class QwenChoice
-    {
-        public string finish_reason;
+        public int index;
         public ChatMessage message;
+        public object logprobs;
+        public string finish_reason;
     }
 
     private void Start()
@@ -137,30 +121,19 @@ public class AnimalChatManager : MonoBehaviour
             return;
         }
 
-        string configPath = Path.Combine(Application.streamingAssetsPath, "api_config.json");
-        
-        if (File.Exists(configPath))
+        var config = ConfigLoader.LoadAPIConfig();
+        if (config != null)
         {
-            try
-            {
-                string json = File.ReadAllText(configPath);
-                var config = JsonUtility.FromJson<ApiConfig>(json);
-                
-                apiKey = config.qwen_api_key;
-                modelName = config.qwen_model;
-                apiEndpoint = config.qwen_endpoint;
-                
-                isInitialized = true;
-                Debug.Log("[AnimalChat] 配置加载成功");
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[AnimalChat] 配置加载失败: {e.Message}");
-            }
+            apiKey = config.deepseek_api_key;
+            modelName = config.deepseek_model;
+            apiEndpoint = config.deepseek_endpoint;
+            
+            isInitialized = true;
+            Debug.Log("[AnimalChat] 配置加载成功");
         }
         else
         {
-            Debug.LogWarning($"[AnimalChat] 配置文件不存在: {configPath}");
+            Debug.LogWarning("[AnimalChat] 配置加载失败或为空");
         }
     }
 
@@ -202,11 +175,12 @@ public class AnimalChatManager : MonoBehaviour
         var userMsg = new ChatMessage { role = "user", content = userMessage };
         messages.Add(userMsg);
 
-        var request = new QwenRequest
+        var request = new DeepSeekRequest
         {
             model = modelName,
-            input = new QwenInput { messages = messages.ToArray() },
-            parameters = new QwenParameters { temperature = 0.7f, max_tokens = 150, result_format = "message" }
+            messages = messages.ToArray(),
+            temperature = 0.7f,
+            max_tokens = 150
         };
 
         string jsonBody = JsonUtility.ToJson(request);
@@ -225,16 +199,12 @@ public class AnimalChatManager : MonoBehaviour
             {
                 try
                 {
-                    var response = JsonUtility.FromJson<QwenResponse>(www.downloadHandler.text);
+                    var response = JsonUtility.FromJson<DeepSeekResponse>(www.downloadHandler.text);
                     
                     string reply;
-                    if (response.output.choices != null && response.output.choices.Length > 0)
+                    if (response.choices != null && response.choices.Length > 0)
                     {
-                        reply = response.output.choices[0].message.content;
-                    }
-                    else if (!string.IsNullOrEmpty(response.output.text))
-                    {
-                        reply = response.output.text;
+                        reply = response.choices[0].message.content;
                     }
                     else
                     {
