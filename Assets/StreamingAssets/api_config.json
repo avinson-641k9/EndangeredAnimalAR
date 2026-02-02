@@ -1,0 +1,5 @@
+{
+    "qwen_api_key": "sk-1e8f8c1ed9ca496b96b8c0144f42cae1",
+    "qwen_model": "qwen-turbo",
+    "qwen_endpoint": "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+}
