@@ -8,7 +8,7 @@ using UnityEngine;
 public class ConfigLoader : MonoBehaviour
 {
     [System.Serializable]
-    private class APIConfig
+    public class APIConfig
     {
         public string deepseek_api_key;
         public string deepseek_model;

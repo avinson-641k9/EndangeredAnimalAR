@@ -66,14 +66,6 @@ public class AnimalChatManager : MonoBehaviour
     public event Action<string> OnError;
 
     [Serializable]
-    private class ApiConfig
-    {
-        public string deepseek_api_key;
-        public string deepseek_model;
-        public string deepseek_endpoint;
-    }
-
-    [Serializable]
     private class ChatMessage
     {
         public string role;

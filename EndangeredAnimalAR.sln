@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.Interaction.Toolkit.Samples.ARStarterAssets", "Unity.XR.Interaction.Toolkit.Samples.ARStarterAssets.csproj", "{9B79E065-A342-597C-5E3C-5E534B80395E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndangeredAnimals.Core", "EndangeredAnimals.Core.csproj", "{16FFF917-AA1B-8734-FC32-3F9E3F84D9ED}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.Interaction.Toolkit.Samples.StarterAssets", "Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj", "{BA41D7C3-1DD5-940F-F0D8-1A73CE965022}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{A2421FAB-522E-C374-1072-5F6435CA68AC}"
@@ -21,6 +23,10 @@ Global
 		{9B79E065-A342-597C-5E3C-5E534B80395E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B79E065-A342-597C-5E3C-5E534B80395E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B79E065-A342-597C-5E3C-5E534B80395E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FFF917-AA1B-8734-FC32-3F9E3F84D9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FFF917-AA1B-8734-FC32-3F9E3F84D9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FFF917-AA1B-8734-FC32-3F9E3F84D9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FFF917-AA1B-8734-FC32-3F9E3F84D9ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA41D7C3-1DD5-940F-F0D8-1A73CE965022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA41D7C3-1DD5-940F-F0D8-1A73CE965022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA41D7C3-1DD5-940F-F0D8-1A73CE965022}.Release|Any CPU.ActiveCfg = Release|Any CPU

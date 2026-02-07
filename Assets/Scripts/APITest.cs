@@ -142,134 +142,13 @@ public class APITest : MonoBehaviour
     /// </summary>
     private void LoadAPIConfig()
     {
-        string configPath = System.IO.Path.Combine(Application.streamingAssetsPath, "api_config.json");
-        
-        if (System.IO.File.Exists(configPath))
+        var config = ConfigLoader.LoadAPIConfig();
+        if (config != null)
         {
-            try
-            {
-                string json = System.IO.File.ReadAllText(configPath);
-                var config = ScriptableObject.CreateInstance<APITestConfig>();
-                System.Type configType = typeof(APITestConfig);
-                
-                // 使用SimpleJSON解析，因为我们需要从JsonUtility无法直接处理的数据中提取值
-                var jsonData = SimpleJSON.JSON.Parse(json);
-                
-                if (jsonData["deepseek_api_key"] != null)
-                {
-                    apiKey = jsonData["deepseek_api_key"];
-                }
-                if (jsonData["deepseek_model"] != null)
-                {
-                    modelName = jsonData["deepseek_model"];
-                }
-                if (jsonData["deepseek_endpoint"] != null)
-                {
-                    apiEndpoint = jsonData["deepseek_endpoint"];
-                }
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"[APITest] 配置文件加载失败: {e.Message}");
-            }
+            apiKey = config.deepseek_api_key;
+            modelName = config.deepseek_model;
+            apiEndpoint = config.deepseek_endpoint;
         }
     }
 
-    // 为了能够在编辑器中测试，我们创建一个临时的配置类
-    private class APITestConfig
-    {
-        public string deepseek_api_key;
-        public string deepseek_model;
-        public string deepseek_endpoint;
-    }
-}
-
-// 简单的JSON解析器，用于在运行时解析配置
-public class SimpleJSON
-{
-    public class JSONNode
-    {
-        private System.Collections.Generic.Dictionary<string, JSONNode> m_dict;
-        private string m_value;
-
-        public JSONNode()
-        {
-            m_dict = new System.Collections.Generic.Dictionary<string, JSONNode>();
-        }
-
-        public JSONNode(string value)
-        {
-            m_value = value;
-        }
-
-        public static JSONNode Parse(string json)
-        {
-            // 简化的JSON解析器，仅用于获取配置值
-            var root = new JSONNode();
-            // 移除空白字符
-            json = json.Replace(" ", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
-            
-            // 查找键值对
-            int start = 1; // 跳过开头的 {
-            while (start < json.Length - 1)
-            {
-                if (json[start] == '"')
-                {
-                    // 解析键名
-                    int keyEnd = json.IndexOf('"', start + 1);
-                    string key = json.Substring(start + 1, keyEnd - start - 1);
-                    
-                    // 查找值的开始
-                    int colonPos = json.IndexOf(':', keyEnd);
-                    int valStart = colonPos + 1;
-                    
-                    // 解析值
-                    if (json[valStart] == '"')
-                    {
-                        // 字符串值
-                        int valEnd = json.IndexOf('"', valStart + 1);
-                        string value = json.Substring(valStart + 1, valEnd - valStart - 1);
-                        
-                        root.m_dict[key] = new JSONNode(value);
-                        start = valEnd + 1;
-                    }
-                    else
-                    {
-                        // 非字符串值（这里简化处理）
-                        int commaOrEnd = json.IndexOf(',', valStart);
-                        if (commaOrEnd == -1) commaOrEnd = json.IndexOf('}', valStart);
-                        
-                        string value = json.Substring(valStart, commaOrEnd - valStart);
-                        root.m_dict[key] = new JSONNode(value);
-                        start = commaOrEnd;
-                    }
-                    
-                    if (json[start] == ',') start++;
-                }
-                else
-                {
-                    start++;
-                }
-            }
-            
-            return root;
-        }
-
-        public JSONNode this[string key]
-        {
-            get
-            {
-                if (m_dict.ContainsKey(key))
-                {
-                    return m_dict[key];
-                }
-                return null;
-            }
-        }
-
-        public override string ToString()
-        {
-            return m_value;
-        }
-    }
 }

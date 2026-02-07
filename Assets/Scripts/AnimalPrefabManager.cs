@@ -101,14 +101,17 @@ public class AnimalPrefabManager : MonoBehaviour
     {
         configMap.Clear();
         
-        foreach (var config in animalConfigs)
+        for (int i = 0; i < animalConfigs.Count; i++)
         {
+            var config = animalConfigs[i];
             if (!string.IsNullOrEmpty(config.imageName))
             {
                 // 如果有动物定义，优先使用定义中的信息
                 if (config.animalDefinition != null)
                 {
                     UpdateConfigFromDefinition(ref config, config.animalDefinition);
+                    // 更新回列表，因为config是值类型（struct）或需要保持引用
+                    animalConfigs[i] = config;
                 }
                 
                 configMap[config.imageName.ToLower()] = config;

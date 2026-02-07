@@ -88,7 +88,7 @@ public class ImageLibraryManager : MonoBehaviour
         }
         
         // 启用图像跟踪（如果需要）
-        if (enableImageTracking && trackedImageManager.trackables.active)
+        if (enableImageTracking)
         {
             trackedImageManager.enabled = true;
         }

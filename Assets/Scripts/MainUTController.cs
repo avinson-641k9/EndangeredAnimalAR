@@ -12,7 +12,7 @@ public class MainUTController : MonoBehaviour
 {
     [Header("AR系统组件")]
     public ARSession arSession;
-    public ARSessionOrigin arSessionOrigin;
+    public MonoBehaviour arSessionOrigin; // 改为MonoBehaviour避免类型引用问题
     public ARTrackedImageManager trackedImageManager;
     
     [Header("UI组件")]
@@ -57,17 +57,18 @@ public class MainUTController : MonoBehaviour
     {
         if (arSession == null)
         {
-            arSession = FindObjectOfType<ARSession>();
+            arSession = FindObjectOfType(typeof(ARSession)) as ARSession;
         }
         
-        if (arSessionOrigin == null)
-        {
-            arSessionOrigin = FindObjectOfType<ARSessionOrigin>();
-        }
+        // 注释掉ARSessionOrigin初始化，避免编译错误
+        // if (arSessionOrigin == null)
+        // {
+        //     arSessionOrigin = FindObjectOfType(typeof(ARSessionOrigin)) as ARSessionOrigin;
+        // }
         
         if (trackedImageManager == null)
         {
-            trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
+            trackedImageManager = FindObjectOfType(typeof(ARTrackedImageManager)) as ARTrackedImageManager;
         }
         
         if (trackedImageManager != null)
