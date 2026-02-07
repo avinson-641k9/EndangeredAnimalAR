@@ -209,7 +209,9 @@ public class AnimalUIManager : MonoBehaviour
         if (messageInputField != null)
         {
             messageInputField.onEndEdit.AddListener((text) => {
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                // 检查是否按下了回车键（新Input System兼容方案）
+                // 当文本不为空且非空白字符时，认为用户按下了回车
+                if (!string.IsNullOrWhiteSpace(text))
                 {
                     OnSendMessage();
                 }
