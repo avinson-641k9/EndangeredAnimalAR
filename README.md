@@ -47,129 +47,75 @@
 
 2. **打开Unity项目**
    - 使用Unity Hub打开项目文件夹
-   - 等待依赖包自动导入
 
 3. **配置API密钥**
-   - 项目已配置 DeepSeek API 密钥
-   - 查看 `Assets/StreamingAssets/api_config.json`
-   - 如需更换API，参考 `API_SETUP.md` 指南
+   - 在 `StreamingAssets/api_config.json` 中添加DeepSeek API密钥
 
-4. **导入3D模型**
-   - 下载濒危动物3D模型（FBX/OBJ格式）
-   - 拖放到 `Assets/Models/` 文件夹
-   - 创建Prefab并配置到 `AnimalPrefabManager`
+4. **运行LLM服务器**
+   ```bash
+   cd LLM_Server
+   pip install -r requirements.txt
+   python app.py
+   ```
 
-5. **创建AR识别图**
-   - 准备512x512 PNG格式识别图
-   - 在Unity中创建Reference Image Library
-   - 配置图像名称与动物Prefab的映射
-
-6. **构建项目**
+5. **构建和运行**
    - 选择目标平台（iOS/Android）
-   - 构建并运行到设备
+   - 构建项目并安装到设备
 
 ## 📁 项目结构
 
 ```
 EndangeredAnimalAR/
 ├── Assets/
-│   ├── Scripts/              # C#脚本
-│   │   ├── AnimalARManager.cs    # AR动物管理器
-│   │   ├── AnimalChatManager.cs  # AI对话管理器
-│   │   ├── MainUTController.cs   # 主控制器
-│   │   ├── GoalManager.cs        # 教育目标管理器
-│   │   ├── AnimalPrefabManager.cs # 动物预制件管理器
-│   │   ├── ImageLibraryManager.cs # 图像库管理器
-│   │   ├── AnimalDefinition.cs   # 动物定义脚本
-│   │   ├── AnimalConfigManager.cs # 动物配置管理器
-│   │   └── ConfigLoader.cs       # 配置加载器
-│   ├── StreamingAssets/      # 配置文件
-│   │   └── api_config.json   # API配置
-│   ├── Models/               # 3D模型资源
-│   │   └── README.md         # 模型资源说明
-│   ├── Scenes/               # Unity场景
-│   │   ├── EndangeredAnimalAR.unity # 主场景
-│   │   └── UI.unity          # UI场景
-│   ├── Resources/            # 资源文件
-│   │   └── ExampleAnimals.txt # 示例动物配置说明
-│   └── Prefabs/              # 预制件（待创建）
-├── ProjectSettings/         # Unity项目设置
-├── Packages/               # Unity包管理
-├── API_SETUP.md            # API配置指南
-├── PROJECT_SUMMARY.md      # 项目总结
-├── DAILY_PROGRESS.md       # 开发日志
-├── ROADMAP.md              # 项目路线图
-└── README.md              # 项目说明
+│   ├── Scenes/              # Unity场景文件
+│   │   ├── UI.unity         # 主UI场景
+│   │   └── EndangeredAnimalAR1.unity  # AR主场景
+│   ├── Scripts/            # C#脚本
+│   │   ├── AR/             # AR相关脚本
+│   │   ├── LLM/            # LLM集成脚本
+│   │   ├── UI/             # UI管理脚本
+│   │   └── Gameplay/       # 游戏逻辑脚本
+│   ├── XR/                 # XR配置
+│   └── Resources/          # 资源文件
+├── LLM_Server/             # Python LLM服务器
+│   ├── app.py              # Flask服务器
+│   └── requirements.txt    # Python依赖
+├── Packages/               # Unity包配置
+└── ProjectSettings/        # Unity项目设置
 ```
-
-## 🎮 使用指南
-
-### 1. 扫描识别图
-- 打开App，扫描预设的动物识别图
-- 等待3D动物模型生成
-
-### 2. 与动物互动
-- 点击动物触发对话
-- 通过语音或文字与动物交流
-- 学习濒危动物保护知识
-
-### 3. 切换动物
-- 扫描不同的识别图切换动物
-- 每种动物有独特的性格和知识
-
-### 4. 学习模式
-- 问答模式：向动物提问
-- 故事模式：听动物讲述生存故事
-- 挑战模式：完成保护知识问答
-- 进度追踪：查看学习成就
 
 ## 🔧 开发指南
 
-### 添加新动物
-1. 准备3D模型和识别图
-2. 在 `AnimalPrefabManager` 中添加动物配置
-3. 在 `AnimalChatManager` 中添加性格配置
-4. 在 `ImageLibraryManager` 中配置识别图
-5. 测试AR识别和对话功能
+### AR功能开发
+1. 使用 `ARAnimalController.cs` 管理AR动物
+2. 配置 `ImageLibraryManager.cs` 设置识别图库
+3. 使用 `AnimalPrefabManager.cs` 管理动物预制件
 
-### 扩展对话系统
-- 修改 `AnimalPersonalities` 字典添加新性格
-- 调整API参数优化响应质量
-- 添加对话历史管理功能
+### UI系统开发
+1. 使用 `MainMenuManager.cs` 管理主菜单
+2. 通过 `AnimalUIManager.cs` 控制动物UI
+3. 使用 `UIPrefabCreator.cs` 创建UI元素
 
-### 性能优化
-- 使用低多边形模型
-- 优化材质和贴图
-- 实现对象池管理
+### LLM集成
+1. 修改 `LLMClient.cs` 调整API设置
+2. 配置 `ConfigLoader.cs` 加载API密钥
+3. 扩展 `app.py` 添加新的对话功能
 
-### 教育目标系统
-- 配置学习目标和成就
-- 追踪用户互动进度
-- 提供个性化反馈
+## 📚 文档
 
-## 📚 教育价值
+- [API设置指南](API_SETUP.md) - 如何配置DeepSeek API
+- [UI实现指南](UI_IMPLEMENTATION_GUIDE.md) - UI系统开发指南
+- [AR开发指南](AR_DEVELOPMENT_GUIDE.md) - AR功能开发指南
 
-### 科普内容
-- 濒危动物生态习性
-- 栖息地保护知识
-- 人类活动对生态的影响
-- 保护措施和成功案例
+## 🤝 贡献
 
-### 学习目标
-- 提高环保意识
-- 了解生物多样性重要性
-- 激发科学探索兴趣
-- 培养责任感
+欢迎提交Issue和Pull Request！
 
-## 🤝 贡献指南
-
-欢迎贡献代码、模型、文档或建议！
-
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+1. Fork项目
+2. 创建功能分支 (`git checkout -b feature/新功能`)
+3. 提交更改 (`git commit -m '添加新功能'`)
+4. 推送到分支 (`git push origin feature/新功能`)
+5. 创建Pull Request
 
 ## 📄 许可证
 
@@ -177,17 +123,10 @@ EndangeredAnimalAR/
 
 ## 🙏 致谢
 
-- Unity Technologies - AR Foundation 和 XR Interaction Toolkit
-- DeepSeek - 大语言模型API服务
-- 开源社区 - 提供的3D模型和工具
-- 所有濒危动物保护工作者
-
-## 📞 联系方式
-
-项目作者：David
-- GitHub: [@avinson-641k9](https://github.com/avinson-641k9)
-- 项目地址：https://github.com/avinson-641k9/EndangeredAnimalAR
+- Unity Technologies - AR Foundation
+- DeepSeek - 大语言模型API
+- 所有贡献者和测试者
 
 ---
 
-**让我们一起用科技保护地球的珍贵生命！** 🌍🐾
+**让科技为生态保护赋能，用AR唤醒对濒危动物的关爱！** 🌍🐾

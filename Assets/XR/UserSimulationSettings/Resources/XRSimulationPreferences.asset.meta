@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a908ba3cced164fb2b0cef4982fd8d56
+=======
+guid: bfd57a93a74854517ba58619db018659
+>>>>>>> 85e14ae (初始提交: 濒危动物 AR 项目)
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
