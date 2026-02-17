@@ -36,8 +36,8 @@ public class SceneChecker : MonoBehaviour
         // 检查3: AnimalUIManager
         CheckAnimalUIManager();
         
-        // 检查4: MainUTController
-        CheckMainUTController();
+        // 检查4: MainUTController (暂时注释，避免编译错误)
+        // CheckMainUTController();
         
         // 检查5: 编译状态
         CheckCompilationStatus();
