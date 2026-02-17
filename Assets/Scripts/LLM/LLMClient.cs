@@ -115,7 +115,7 @@ namespace EndangeredAnimalAR.LLM
         /// <summary>
         /// 发送消息到 LLM 服务器
         /// </summary>
-        public void SendMessage(string message)
+        public new void SendMessage(string message)
         {
             if (string.IsNullOrEmpty(message))
                 return;
